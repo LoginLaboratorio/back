@@ -9,6 +9,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         data["username"] = self.user.username # pyrefly: ignore[missing-attribute]
         data["email"] = self.user.email # pyrefly: ignore[missing-attribute]
+        data["role"] = self.user.role # pyrefly: ignore[missing-attribute]
 
         return data
 

@@ -9,7 +9,7 @@ from applications.users import serializers
 
 class LoginView(TokenObtainPairView):
     serializer_class = serializers.CustomTokenObtainPairSerializer
-    permission_classes = []  # pyrefly: ignore[bad-override-mutable-attribute]
+    permission_classes = [AllowAny]  # pyrefly: ignore[bad-override-mutable-attribute]
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -48,7 +48,7 @@ class RegisterView(APIView):
 
 
 class MeView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         serializer = serializers.UserSerializer(request.user)

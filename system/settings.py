@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "applications.users"
+    "drf_spectacular",
+    "applications.users",
+    "applications.tareas"
 ]
 
 MIDDLEWARE = [
@@ -134,6 +136,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Documentación del sistema de tareas',
+    'DESCRIPTION': 'Esta documentación incluye los endpoints de login y de tareas',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 JWT_COOKIE_CONFIG = {

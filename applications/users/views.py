@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -35,7 +35,7 @@ class LoginView(TokenObtainPairView):
 
 
 class RegisterView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = serializers.UserCreateSerializer(data=request.data)
@@ -48,7 +48,7 @@ class RegisterView(APIView):
 
 
 class MeView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         serializer = serializers.UserSerializer(request.user)

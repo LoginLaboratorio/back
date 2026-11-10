@@ -56,7 +56,7 @@ class MeView(APIView):
 
 
 class LogoutView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request):
         response = Response(

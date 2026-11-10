@@ -31,18 +31,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "rest_framework",
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "applications.users"
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -50,6 +54,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'system.urls'
+
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {
@@ -116,6 +122,21 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        "applications.users.authentication.JWTCookieAuthentication",
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
+
+JWT_COOKIE_CONFIG = {
+    "httponly": True,
+    "samesite": "Lax",
+    "secure": not DEBUG,
+}
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
